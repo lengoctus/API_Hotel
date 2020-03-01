@@ -26,23 +26,37 @@ namespace API_Hotel.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var listBook = await _hotel.GetList();
+            var listBook = await _hotel.Get();
 
             var listbook_view = _mapper.Map<List<Booking_View>>(listBook);
             return Ok(listbook_view);
         }
 
+        [HttpPost()]
         public async Task<IActionResult> Register(Booking_View book_view)
         {
             if (ModelState.IsValid)
             {
-                var book = await _hotel.RegisterBooking(_mapper.Map<Booking>(book_view));
+                var book = await _hotel.Add(_mapper.Map<Booking>(book_view));
                 if (book != null)
                 {
                     return Ok(_mapper.Map<Booking_View>(book));
                 }
             }
             return BadRequest();
+        }
+
+        [HttpGet("{phone}")]
+        public async Task<ActionResult<Booking_View>> Get(string phone)
+        {
+            var book = await _hotel.Get(phone);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            var book_view = _mapper.Map<Booking_View>(book);
+            return Ok(book_view);
         }
 
     }

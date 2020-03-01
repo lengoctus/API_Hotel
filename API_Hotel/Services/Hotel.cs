@@ -39,14 +39,14 @@ namespace API_Hotel.Services
             return strBuilder.ToString();
         }
 
-        public Task<List<Booking>> GetList()
+        public Task<List<Booking>> Get()
         {
             var list = _db.Booking.ToList();
 
             return Task.Run(() => list);
         }
 
-        public Task<Booking> RegisterBooking(Booking book)
+        public Task<Booking> Add(Booking book)
         {
             if (_db.Booking.Find(book.Phone) == null)
             {
@@ -56,6 +56,17 @@ namespace API_Hotel.Services
                 return Task.Run(() => book);
             }
             return null;
+        }
+
+        public Task<Booking> Get(string phone)
+        {
+            var book = _db.Booking.SingleOrDefault(p => p.Phone == phone);
+
+            if (book == null)
+            {
+                return null;
+            }
+            return Task.Run(() => book);
         }
     }
 }
