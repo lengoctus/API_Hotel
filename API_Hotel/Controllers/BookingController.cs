@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Hotel.Controllers
 {
-    [ApiController]
     [Route("api/Booking")]
     public class BookingController : ControllerBase
     {
@@ -24,32 +23,20 @@ namespace API_Hotel.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<ActionResult<List<Booking_View>>> Gets()
         {
-            var listBook = await _hotel.Get();
+            var listBook = await _hotel.Gets();
 
             var listbook_view = _mapper.Map<List<Booking_View>>(listBook);
             return Ok(listbook_view);
         }
 
-        [HttpPost()]
-        public async Task<IActionResult> Register(Booking_View book_view)
-        {
-            if (ModelState.IsValid)
-            {
-                var book = await _hotel.Add(_mapper.Map<Booking>(book_view));
-                if (book != null)
-                {
-                    return Ok(_mapper.Map<Booking_View>(book));
-                }
-            }
-            return BadRequest();
-        }
-
+     
         [HttpGet("{phone}")]
         public async Task<ActionResult<Booking_View>> Get(string phone)
         {
             var book = await _hotel.Get(phone);
+
             if (book == null)
             {
                 return NotFound();

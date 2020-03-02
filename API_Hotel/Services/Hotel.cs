@@ -39,28 +39,17 @@ namespace API_Hotel.Services
             return strBuilder.ToString();
         }
 
-        public Task<List<Booking>> Get()
+        public Task<List<Booking>> Gets()
         {
             var list = _db.Booking.ToList();
 
             return Task.Run(() => list);
         }
 
-        public Task<Booking> Add(Booking book)
-        {
-            if (_db.Booking.Find(book.Phone) == null)
-            {
-                book.Password = Enscrypt(book.Phone, book.Password);
-                _db.Add(book);
-                _db.SaveChanges();
-                return Task.Run(() => book);
-            }
-            return null;
-        }
 
         public Task<Booking> Get(string phone)
         {
-            var book = _db.Booking.SingleOrDefault(p => p.Phone == phone);
+            var book = _db.Booking.SingleOrDefault(p => p.Phone.Equals(phone));
 
             if (book == null)
             {

@@ -12,15 +12,7 @@ namespace API_Hotel.Services
         /// Get list Booking
         /// </summary>
         /// <returns></returns>
-        Task<List<Booking>> Get();
-
-
-        /// <summary>
-        /// Register Booking
-        /// </summary>
-        /// <param name="book"></param>
-        /// <returns></returns>
-        Task<Booking> Add(Booking book);
+        Task<List<Booking>> Gets();
 
         /// <summary>
         /// Get Booking by phone

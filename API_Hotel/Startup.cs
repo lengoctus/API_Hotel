@@ -53,7 +53,8 @@ namespace API_Hotel
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{Controller=Booking}/{Action=Get}/{id?}");
+                    pattern: "{Controller=Booking}/{Action=Gets}/{id?}");
+                //endpoints.MapControllers();
             });
         }
     }
