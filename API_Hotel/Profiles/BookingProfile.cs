@@ -1,6 +1,4 @@
-﻿using API_Hotel.Models.Entities;
-using API_Hotel.Models.ModelViews;
-using AutoMapper;
+﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +10,11 @@ namespace API_Hotel.Profiles
     {
         public BookingProfile()
         {
-            CreateMap<Booking, Booking_View>();
-            CreateMap<Booking_View, Booking>();
+            // Convert from Booking to Booking_View
+            CreateMap<Models.Entities.Booking, Models.ModelViews.Booking_View>();
+
+            // Convert from Booking_View to Booking
+            CreateMap<Models.ModelViews.Booking_View, Models.Entities.Booking>();
         }
     }
 }

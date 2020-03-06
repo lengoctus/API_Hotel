@@ -23,27 +23,25 @@ namespace API_Hotel.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Booking_View>>> Gets()
+        public async Task<ActionResult<List<Booking_View>>> Gets(string FullName, string Phone)
         {
-            var listBook = await _hotel.Gets();
-
-            var listbook_view = _mapper.Map<List<Booking_View>>(listBook);
-            return Ok(listbook_view);
+            var book = await _hotel.Gets(FullName, Phone);
+            var listBook_view = _mapper.Map<List<Booking_View>>(book);
+            return Ok(listBook_view);
         }
 
-     
-        [HttpGet("{phone}")]
-        public async Task<ActionResult<Booking_View>> Get(string phone)
+        [HttpPost("Add")]
+        public async Task<ActionResult<Booking_View>> Add([FromBody]Booking_View booking_view)
         {
-            var book = await _hotel.Get(phone);
+            var book = _mapper.Map<Booking>(booking_view);
+            var rs = await _hotel.Add(book);
 
-            if (book == null)
+            if (rs == true)
             {
-                return NotFound();
+                return Ok("Register Booking Success!!");
             }
 
-            var book_view = _mapper.Map<Booking_View>(book);
-            return Ok(book_view);
+            return BadRequest();
         }
 
     }

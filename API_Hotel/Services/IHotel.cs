@@ -8,18 +8,20 @@ namespace API_Hotel.Services
 {
     public interface IHotel
     {
-        /// <summary>
-        /// Get list Booking
-        /// </summary>
-        /// <returns></returns>
-        Task<List<Booking>> Gets();
 
         /// <summary>
-        /// Get Booking by phone
+        /// Get list Booking by FullName or Phone
         /// </summary>
-        /// <param name="phone"></param>
+        /// <param name="FullName"></param>
+        /// <param name="Phone"></param>
         /// <returns></returns>
-        Task<Booking> Get(string phone);
+        Task<List<Booking>> Gets(string FullName, string Phone);
+
+        /// <summary>
+        /// Register Account for User
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> Add(Booking acc);
 
     }
 }

@@ -108,8 +108,6 @@ namespace API_Hotel.Models.Entities
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Date).HasColumnType("date");
-
                 entity.Property(e => e.Email)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -118,9 +116,7 @@ namespace API_Hotel.Models.Entities
 
                 entity.Property(e => e.Password).HasMaxLength(50);
 
-                entity.Property(e => e.Phone)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.Property(e => e.Phone).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Employee>(entity =>
