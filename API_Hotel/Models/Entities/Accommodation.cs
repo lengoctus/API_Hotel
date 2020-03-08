@@ -11,9 +11,10 @@ namespace API_Hotel.Models.Entities
         public decimal? TotalAmount { get; set; }
         public int AccCategory { get; set; }
         public bool? Service { get; set; }
+        public bool? Status { get; set; }
 
         public virtual AccommodationCategory AccCategoryNavigation { get; set; }
         public virtual Meals Id1 { get; set; }
-        public virtual Admission IdNavigation { get; set; }
+        public virtual Booking IdNavigation { get; set; }
     }
 }

@@ -15,7 +15,6 @@ namespace API_Hotel.Services
     {
         private readonly ConnectDbContext _db;
 
-
         public Hotel(ConnectDbContext db)
         {
             _db = db;
@@ -42,67 +41,69 @@ namespace API_Hotel.Services
             return strBuilder.ToString();
         }
 
-        public Task<List<Booking>> Gets()
+        public Task<List<Customer>> Gets()
         {
             try
             {
-                var list = _db.Booking.AsNoTracking().ToList();
-                return Task.Run(() => list);
+                var list = _db.Customer.AsNoTracking().ToList();
+                return Task.FromResult<List<Customer>>(list);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var d = e.Message;
-                return Task.FromResult<List<Booking>>(null);
+                return Task.FromResult<List<Customer>>(null);
             }
         }
 
-        public Task<List<Booking>> Gets(string FullName, string Phone)
+        public Task<List<Customer>> Gets(string FullName, string Phone)
         {
             try
             {
                 if (!string.IsNullOrEmpty(FullName) && string.IsNullOrEmpty(Phone))
                 {
-                    var findBook_fullname = _db.Booking.AsNoTracking().Where(p => p.FullName.ToLower() == FullName.Trim().ToLower()).ToList();
-                    return Task.Run(() => findBook_fullname);
+                    var findBook_fullname = _db.Customer.AsNoTracking().Where(p => p.FullName.ToLower() == FullName.Trim().ToLower()).ToList();
+                    return Task.FromResult<List<Customer>>(findBook_fullname);
                 }
                 else if (!string.IsNullOrEmpty(Phone) && string.IsNullOrEmpty(FullName))
                 {
-                    var findBook_phone = _db.Booking.AsNoTracking().Where(p => p.Phone == Phone.Trim()).ToList();
-                    return Task.Run(() => findBook_phone);
+                    var findBook_phone = _db.Customer.AsNoTracking().Where(p => p.Phone == Phone.Trim()).ToList();
+                    return Task.FromResult<List<Customer>>(findBook_phone);
                 }
                 else if (!string.IsNullOrEmpty(FullName) && !string.IsNullOrEmpty(Phone))
                 {
-                    var findBook = _db.Booking.AsNoTracking().Where(p => (p.FullName.ToLower() == FullName.Trim().ToLower()) && (p.Phone == Phone.Trim())).ToList();
-                    return Task.Run(() => findBook);
+                    var findBook = _db.Customer.AsNoTracking().Where(p => (p.FullName.ToLower() == FullName.Trim().ToLower()) && (p.Phone == Phone.Trim())).ToList();
+                    return Task.FromResult<List<Customer>>(findBook);
                 }
                 else if (string.IsNullOrEmpty(FullName) && string.IsNullOrEmpty(Phone))
                 {
-                     return Task.Run(() => Gets());
+                    return Task.Run(() => this.Gets());
                 }
             }
             catch
             {
-                return Task.Run(() => Gets());
+                return Task.Run(() => this.Gets());
             }
 
-            return Task.Run(() => Gets());
+            return Task.Run(() => this.Gets());
         }
 
-
-        public Task<bool> Add(Booking book)
+        public Task<bool> UpdateInfo(int CusId, Customer Cus, IMapper mapper)
         {
             try
             {
-                if (_db.Booking.AsNoTracking().SingleOrDefault(p => p.Phone == book.Phone.Trim()) == null)
+                var customer = _db.Customer.SingleOrDefault(p => p.Id == CusId);
+                if (customer != null)
                 {
-                    book.Password = Enscrypt(book.Phone, book.Password);
-                    _db.Booking.Add(book);
-                    int rs = _db.SaveChanges();
-                    return rs > 0 ? Task.FromResult<bool>(true) : Task.FromResult<bool>(false);
+                    Cus.Password = Enscrypt(Cus.Phone, Cus.Password);
+                    customer = mapper.Map(Cus, customer);
+
+                    int a = _db.SaveChanges();
+                    return Task.FromResult<bool>(true);
                 }
             }
-            catch
+            catch(Exception e)
             {
+                var d = e.Message;
                 return Task.FromResult<bool>(false);
             }
             return Task.FromResult<bool>(false);

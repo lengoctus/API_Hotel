@@ -18,8 +18,8 @@ namespace API_Hotel.Models.Entities
         public virtual DbSet<Accommodation> Accommodation { get; set; }
         public virtual DbSet<AccommodationCategory> AccommodationCategory { get; set; }
         public virtual DbSet<Account> Account { get; set; }
-        public virtual DbSet<Admission> Admission { get; set; }
         public virtual DbSet<Booking> Booking { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Invoice> Invoice { get; set; }
         public virtual DbSet<ListServices> ListServices { get; set; }
@@ -87,7 +87,7 @@ namespace API_Hotel.Models.Entities
                 entity.Property(e => e.Phone).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Admission>(entity =>
+            modelBuilder.Entity<Booking>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -98,9 +98,14 @@ namespace API_Hotel.Models.Entities
                 entity.Property(e => e.Luggage).HasColumnType("text");
 
                 entity.Property(e => e.OutDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Cus)
+                    .WithMany(p => p.Booking)
+                    .HasForeignKey(d => d.CusId)
+                    .HasConstraintName("FK_Booking_Customer");
             });
 
-            modelBuilder.Entity<Booking>(entity =>
+            modelBuilder.Entity<Customer>(entity =>
             {
                 entity.Property(e => e.Address).HasMaxLength(50);
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -18,12 +19,21 @@ namespace Client.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var result = ""
+            //HttpClient client = new HttpClient();
+            //Task<string> customer = client.GetStringAsync("http://localhost:8012/api/Customer/");
+            //string urlcontent = await customer;
+
             return View();
         }
 
-       
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+
     }
 }
