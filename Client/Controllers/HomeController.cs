@@ -4,9 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Client.Models.ModelsView;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-
+using Newtonsoft.Json;
 
 namespace Client.Controllers
 {
@@ -33,7 +34,5 @@ namespace Client.Controllers
         {
             return View();
         }
-
-
     }
 }

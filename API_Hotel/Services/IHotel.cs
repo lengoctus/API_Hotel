@@ -25,5 +25,14 @@ namespace API_Hotel.Services
         /// <returns></returns>
         Task<bool> UpdateInfo(int CusId, Customer Cus, IMapper mapper);
 
+
+        /// <summary>
+        /// Login with Phone and Password
+        /// </summary>
+        /// <param name="Phone"></param>
+        /// <param name="Password"></param>
+        /// <returns></returns>
+        Task<Customer> Login(string Phone, string Password);
+
     }
 }

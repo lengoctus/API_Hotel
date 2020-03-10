@@ -61,18 +61,18 @@ namespace API_Hotel.Services
             {
                 if (!string.IsNullOrEmpty(FullName) && string.IsNullOrEmpty(Phone))
                 {
-                    var findBook_fullname = _db.Customer.AsNoTracking().Where(p => p.FullName.ToLower() == FullName.Trim().ToLower()).ToList();
-                    return Task.FromResult<List<Customer>>(findBook_fullname);
+                    var findCustomer_fullname = _db.Customer.AsNoTracking().Where(p => p.FullName.ToLower() == FullName.Trim().ToLower()).ToList();
+                    return Task.FromResult<List<Customer>>(findCustomer_fullname);
                 }
                 else if (!string.IsNullOrEmpty(Phone) && string.IsNullOrEmpty(FullName))
                 {
-                    var findBook_phone = _db.Customer.AsNoTracking().Where(p => p.Phone == Phone.Trim()).ToList();
-                    return Task.FromResult<List<Customer>>(findBook_phone);
+                    var findCustomer_phone = _db.Customer.AsNoTracking().Where(p => p.Phone == Phone.Trim()).ToList();
+                    return Task.FromResult<List<Customer>>(findCustomer_phone);
                 }
                 else if (!string.IsNullOrEmpty(FullName) && !string.IsNullOrEmpty(Phone))
                 {
-                    var findBook = _db.Customer.AsNoTracking().Where(p => (p.FullName.ToLower() == FullName.Trim().ToLower()) && (p.Phone == Phone.Trim())).ToList();
-                    return Task.FromResult<List<Customer>>(findBook);
+                    var findCustomer = _db.Customer.AsNoTracking().Where(p => (p.FullName.ToLower() == FullName.Trim().ToLower()) && (p.Phone == Phone.Trim())).ToList();
+                    return Task.FromResult<List<Customer>>(findCustomer);
                 }
                 else if (string.IsNullOrEmpty(FullName) && string.IsNullOrEmpty(Phone))
                 {
@@ -85,6 +85,18 @@ namespace API_Hotel.Services
             }
 
             return Task.Run(() => this.Gets());
+        }
+
+        public Task<Customer> Login(string Phone, string Password)
+        {
+            if (!string.IsNullOrEmpty(Phone) && !string.IsNullOrEmpty(Password))
+            {
+                Password = Enscrypt(Phone.Trim(), Password.Trim());
+                var findCustomer_Login = _db.Customer.SingleOrDefault(p => p.Phone == Phone.Trim() && p.Password == Password);
+
+                return Task.FromResult<Customer>(findCustomer_Login);
+            }
+            return Task.FromResult<Customer>(null);
         }
 
         public Task<bool> UpdateInfo(int CusId, Customer Cus, IMapper mapper)
@@ -101,7 +113,7 @@ namespace API_Hotel.Services
                     return Task.FromResult<bool>(true);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var d = e.Message;
                 return Task.FromResult<bool>(false);

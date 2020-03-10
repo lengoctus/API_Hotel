@@ -1,4 +1,5 @@
-﻿
+﻿@model Client.Models.ModelsView.CustomerView
+
 @{
     Layout = null;
 }
@@ -39,27 +40,30 @@
         <div class="container-login100">
             <div class="wrap-login100">
 
-                <form class="login100-form validate-form">
-                    <div>
-                        <span>
-                            HOME
-                        </span>
+                <form class="login100-form validate-form" id="ahh" method="post">
+                    <div style="display: inline">
+                        <div style="display: block">
+                            <a asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-arrow-circle-left fa-2x"></i>
+                                <span style="font-weight:500">BACK</span>
+                            </a>
+                        </div>
                     </div>
 
                     <span class="login100-form-title p-b-43">
-                        Login to continue
+                        Login Account
                     </span>
 
 
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="email">
+                    <div class="wrap-input100 validate-input" data-validate="Phone is required">
+                        <input class="input100" type="text" name="phone" asp-for="@Model.Phone">
                         <span class="focus-input100"></span>
-                        <span class="label-input100">Email</span>
+                        <span class="label-input100">Phone</span>
                     </div>
 
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="pass">
+                        <input class="input100" type="password" asp-for="Password">
                         <span class="focus-input100"></span>
                         <span class="label-input100">Password</span>
                     </div>
@@ -79,9 +83,8 @@
                         </div>
                     </div>
 
-
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
+                        <button class="login100-form-btn" id="btnSubmit" >
                             Login
                         </button>
                     </div>
@@ -129,7 +132,7 @@
     <!--===============================================================================================-->
     <script src="~/formLogin/vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
-    
+    <script src="https://kit.fontawesome.com/b48db25390.js" crossorigin="anonymous"></script>
     <script src="~/formLogin/js/main.js"></script>
 
 </body>

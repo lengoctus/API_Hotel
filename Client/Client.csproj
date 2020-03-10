@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Models\Entities\" />
-    <Folder Include="Models\ModelsView\" />
     <Folder Include="ViewComponents\" />
     <Folder Include="Views\Shared\Components\" />
   </ItemGroup>

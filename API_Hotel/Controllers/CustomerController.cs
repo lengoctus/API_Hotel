@@ -29,7 +29,19 @@ namespace API_Hotel.Controllers
             var listBook_view = _mapper.Map<List<Customer_View>>(book);
             return Ok(listBook_view);
         }
-        
+
+        [HttpPost("login")]
+        public async Task<ActionResult<Customer_View>> Login([FromBody]Customer_View customer_view)
+        {
+            var customer = await _hotel.Login(customer_view.Phone, customer_view.Password);
+            var cus_view = _mapper.Map<Customer_View>(customer);
+            if (cus_view != null)
+            {
+                return Ok(cus_view);
+            }
+            return NotFound();
+        }
+
         [HttpPut("{CusId}")]
         public async Task<ActionResult> Update(int CusId, [FromBody]Customer_View Cus)
         {
