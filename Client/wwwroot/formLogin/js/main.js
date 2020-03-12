@@ -72,14 +72,23 @@
 
     /*==================================================================*/
 
-    $('#btnSubmit').click(function () {
-        var x = $("#ahh").serializeArray();
-        $.each(x, function (i, field) {
-            $("#output").append(field.name + ":"
-                + field.value + " ");
-        }); 
+    //$('#btnSubmit').click(function () {
+    //    var form = $("form").serialize();
 
-    })
+    //    $.ajax({
+    //        type: "post",
+    //        async: true,
+    //        dataType: "json",
+    //        accepts: "application/json",
+    //        url: "http://localhost:8012/api/Customer/Login",
+    //        data: form,
+    //        success: function () {
+    //            alert("ok");
+    //        }, error: function (err) {
+    //            console.log(err);
+    //        }
+    //    })
+    //})
 
 
 })(jQuery);

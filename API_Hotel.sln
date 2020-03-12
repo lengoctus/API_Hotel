@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Hotel", "API_Hotel\API_
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{6481D042-15D4-4EAB-9142-424B7CCD78B1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHotel", "WebHotel\WebHotel.csproj", "{EA7C6784-7BD5-41F4-82CF-62279BD6EE75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6481D042-15D4-4EAB-9142-424B7CCD78B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6481D042-15D4-4EAB-9142-424B7CCD78B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6481D042-15D4-4EAB-9142-424B7CCD78B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA7C6784-7BD5-41F4-82CF-62279BD6EE75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA7C6784-7BD5-41F4-82CF-62279BD6EE75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA7C6784-7BD5-41F4-82CF-62279BD6EE75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA7C6784-7BD5-41F4-82CF-62279BD6EE75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

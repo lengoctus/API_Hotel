@@ -39,7 +39,7 @@ namespace API_Hotel.Controllers
             {
                 return Ok(cus_view);
             }
-            return NotFound();
+            return NotFound(null);
         }
 
         [HttpPut("{CusId}")]
