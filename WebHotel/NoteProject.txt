@@ -1,0 +1,1 @@
+﻿Scaffold-DbContext "Server=.;Database=HotelManagement;user id=sa;password=123456" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/Entities -Context HotelManagementContext -f

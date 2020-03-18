@@ -18,6 +18,7 @@ namespace WebHotel.Models.Entities
         public virtual DbSet<Accommodation> Accommodation { get; set; }
         public virtual DbSet<AccommodationCategory> AccommodationCategory { get; set; }
         public virtual DbSet<Account> Account { get; set; }
+        public virtual DbSet<Bill> Bill { get; set; }
         public virtual DbSet<Booking> Booking { get; set; }
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
@@ -26,11 +27,13 @@ namespace WebHotel.Models.Entities
         public virtual DbSet<Meals> Meals { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<ServiceOfAcc> ServiceOfAcc { get; set; }
+        public virtual DbSet<Services> Services { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.;Database=HotelManagement;user id=sa;password=123456");
             }
         }
@@ -39,11 +42,13 @@ namespace WebHotel.Models.Entities
         {
             modelBuilder.Entity<Accommodation>(entity =>
             {
-                entity.HasKey(e => new { e.Id, e.AccCategory });
-
                 entity.Property(e => e.AccName).HasMaxLength(50);
 
                 entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.Image)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 0)");
 
@@ -52,24 +57,10 @@ namespace WebHotel.Models.Entities
                     .HasForeignKey(d => d.AccCategory)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Accommodation_AccommodationCategory");
-
-                entity.HasOne(d => d.IdNavigation)
-                    .WithMany(p => p.Accommodation)
-                    .HasForeignKey(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Accommodation_Admission");
-
-                entity.HasOne(d => d.Id1)
-                    .WithMany(p => p.Accommodation)
-                    .HasForeignKey(d => d.Id)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Accommodation_Meals");
             });
 
             modelBuilder.Entity<AccommodationCategory>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Charge).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Name).HasMaxLength(50);
@@ -86,11 +77,32 @@ namespace WebHotel.Models.Entities
                 entity.Property(e => e.Phone).HasMaxLength(50);
             });
 
-            modelBuilder.Entity<Booking>(entity =>
+            modelBuilder.Entity<Bill>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.BookId).HasColumnName("BookID");
+
+                entity.Property(e => e.CusId).HasColumnName("CusID");
+
+                entity.Property(e => e.DateCreate).HasColumnType("date");
+
+                entity.Property(e => e.TotalAmount).HasColumnType("decimal(18, 0)");
+
+                entity.HasOne(d => d.Cus)
+                    .WithMany(p => p.Bill)
+                    .HasForeignKey(d => d.CusId)
+                    .HasConstraintName("FK_Bill_Customer1");
+            });
+
+            modelBuilder.Entity<Booking>(entity =>
+            {
+                entity.HasKey(e => new { e.Id, e.AccId, e.CusId })
+                    .HasName("PK_Booking_1");
+
                 entity.Property(e => e.AccId).HasColumnName("AccID");
+
+                entity.Property(e => e.CusId).HasColumnName("CusID");
 
                 entity.Property(e => e.Address).HasMaxLength(50);
 
@@ -100,10 +112,17 @@ namespace WebHotel.Models.Entities
 
                 entity.Property(e => e.OutDate).HasColumnType("datetime");
 
+                entity.HasOne(d => d.Acc)
+                    .WithMany(p => p.Booking)
+                    .HasForeignKey(d => d.AccId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Booking_Accommodation");
+
                 entity.HasOne(d => d.Cus)
                     .WithMany(p => p.Booking)
                     .HasForeignKey(d => d.CusId)
-                    .HasConstraintName("FK_Booking_Customer");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Booking_Customer1");
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -178,8 +197,6 @@ namespace WebHotel.Models.Entities
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.AccId).HasColumnName("AccID");
-
                 entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.Charge).HasColumnType("decimal(18, 0)");
@@ -213,6 +230,34 @@ namespace WebHotel.Models.Entities
                     .HasForeignKey(d => d.IdServices)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServiceOfAcc_ListServices");
+            });
+
+            modelBuilder.Entity<Services>(entity =>
+            {
+                entity.HasKey(e => new { e.Id, e.AccId, e.MealId })
+                    .HasName("PK_Services_1");
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AccId).HasColumnName("AccID");
+
+                entity.Property(e => e.MealId).HasColumnName("MealID");
+
+                entity.Property(e => e.Amount).HasColumnType("decimal(18, 0)");
+
+                entity.Property(e => e.Description).HasColumnType("text");
+
+                entity.HasOne(d => d.Acc)
+                    .WithMany(p => p.Services)
+                    .HasForeignKey(d => d.AccId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Services_Accommodation1");
+
+                entity.HasOne(d => d.Meal)
+                    .WithMany(p => p.Services)
+                    .HasForeignKey(d => d.MealId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Services_Meals");
             });
 
             OnModelCreatingPartial(modelBuilder);

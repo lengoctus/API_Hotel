@@ -7,6 +7,7 @@ namespace WebHotel.Models.Entities
     {
         public Customer()
         {
+            Bill = new HashSet<Bill>();
             Booking = new HashSet<Booking>();
         }
 
@@ -20,6 +21,7 @@ namespace WebHotel.Models.Entities
         public string Phone { get; set; }
         public string Password { get; set; }
 
+        public virtual ICollection<Bill> Bill { get; set; }
         public virtual ICollection<Booking> Booking { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -116,6 +117,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
@@ -124,6 +126,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -339,6 +342,93 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\booking\font\roboto\Roboto-Bold.woff2" />
+    <None Include="wwwroot\booking\font\roboto\Roboto-Light.woff2" />
+    <None Include="wwwroot\booking\font\roboto\Roboto-Medium.woff2" />
+    <None Include="wwwroot\booking\font\roboto\Roboto-Regular.woff2" />
+    <None Include="wwwroot\booking\font\roboto\Roboto-Thin.woff2" />
+    <None Include="wwwroot\booking\img\lightbox\default-skin.svg" />
+    <None Include="wwwroot\booking\img\svg\arrow_left.svg" />
+    <None Include="wwwroot\booking\img\svg\arrow_right.svg" />
+    <None Include="wwwroot\booking\js\addons\datatables-select.js" />
+    <None Include="wwwroot\booking\js\addons\datatables-select.min.js" />
+    <None Include="wwwroot\booking\js\addons\datatables.js" />
+    <None Include="wwwroot\booking\js\addons\datatables.min.js" />
+    <None Include="wwwroot\booking\js\addons\imagesloaded.pkgd.min.js" />
+    <None Include="wwwroot\booking\js\addons\jquery.zmd.hierarchical-display.js" />
+    <None Include="wwwroot\booking\js\addons\jquery.zmd.hierarchical-display.min.js" />
+    <None Include="wwwroot\booking\js\addons\masonry.pkgd.min.js" />
+    <None Include="wwwroot\booking\js\addons\progressBar.js" />
+    <None Include="wwwroot\booking\js\addons\progressBar.min.js" />
+    <None Include="wwwroot\booking\js\addons\rating.js" />
+    <None Include="wwwroot\booking\js\addons\rating.min.js" />
+    <None Include="wwwroot\booking\js\bootstrap.js" />
+    <None Include="wwwroot\booking\js\bootstrap.min.js" />
+    <None Include="wwwroot\booking\js\jquery-3.4.1.min.js" />
+    <None Include="wwwroot\booking\js\mdb.js" />
+    <None Include="wwwroot\booking\js\mdb.min.js" />
+    <None Include="wwwroot\booking\js\modules\bs-custom-file-input.js" />
+    <None Include="wwwroot\booking\js\modules\chart.js" />
+    <None Include="wwwroot\booking\js\modules\default-file-input.js" />
+    <None Include="wwwroot\booking\js\modules\enhanced-modals.js" />
+    <None Include="wwwroot\booking\js\modules\forms-free.js" />
+    <None Include="wwwroot\booking\js\modules\jquery.easing.js" />
+    <None Include="wwwroot\booking\js\modules\scrolling-navbar.js" />
+    <None Include="wwwroot\booking\js\modules\treeview.js" />
+    <None Include="wwwroot\booking\js\modules\velocity.js" />
+    <None Include="wwwroot\booking\js\modules\velocity.min.js" />
+    <None Include="wwwroot\booking\js\modules\waves.js" />
+    <None Include="wwwroot\booking\js\modules\wow.js" />
+    <None Include="wwwroot\booking\js\popper.min.js" />
+    <None Include="wwwroot\booking\scss\addons\_datatables-select.scss" />
+    <None Include="wwwroot\booking\scss\addons\_datatables.scss" />
+    <None Include="wwwroot\booking\scss\addons\_directives.scss" />
+    <None Include="wwwroot\booking\scss\addons\_flags.scss" />
+    <None Include="wwwroot\booking\scss\addons\_hierarchical-display.scss" />
+    <None Include="wwwroot\booking\scss\addons\_rating.scss" />
+    <None Include="wwwroot\booking\scss\core\bootstrap\_functions.scss" />
+    <None Include="wwwroot\booking\scss\core\bootstrap\_rfs.scss" />
+    <None Include="wwwroot\booking\scss\core\bootstrap\_variables.scss" />
+    <None Include="wwwroot\booking\scss\core\_colors.scss" />
+    <None Include="wwwroot\booking\scss\core\_global.scss" />
+    <None Include="wwwroot\booking\scss\core\_helpers.scss" />
+    <None Include="wwwroot\booking\scss\core\_masks.scss" />
+    <None Include="wwwroot\booking\scss\core\_mixins.scss" />
+    <None Include="wwwroot\booking\scss\core\_typography.scss" />
+    <None Include="wwwroot\booking\scss\core\_variables.scss" />
+    <None Include="wwwroot\booking\scss\core\_waves.scss" />
+    <None Include="wwwroot\booking\scss\free\modules\animations-extended\animations-extended.scss" />
+    <None Include="wwwroot\booking\scss\free\modules\animations-extended\_module.scss" />
+    <None Include="wwwroot\booking\scss\free\_animations-basic.scss" />
+    <None Include="wwwroot\booking\scss\free\_badges.scss" />
+    <None Include="wwwroot\booking\scss\free\_buttons.scss" />
+    <None Include="wwwroot\booking\scss\free\_cards.scss" />
+    <None Include="wwwroot\booking\scss\free\_carousels.scss" />
+    <None Include="wwwroot\booking\scss\free\_depreciated.scss" />
+    <None Include="wwwroot\booking\scss\free\_dropdowns.scss" />
+    <None Include="wwwroot\booking\scss\free\_footers.scss" />
+    <None Include="wwwroot\booking\scss\free\_forms.scss" />
+    <None Include="wwwroot\booking\scss\free\_input-group.scss" />
+    <None Include="wwwroot\booking\scss\free\_list-group.scss" />
+    <None Include="wwwroot\booking\scss\free\_loader.scss" />
+    <None Include="wwwroot\booking\scss\free\_modals.scss" />
+    <None Include="wwwroot\booking\scss\free\_msc.scss" />
+    <None Include="wwwroot\booking\scss\free\_navbars.scss" />
+    <None Include="wwwroot\booking\scss\free\_pagination.scss" />
+    <None Include="wwwroot\booking\scss\free\_steppers.scss" />
+    <None Include="wwwroot\booking\scss\free\_switch.scss" />
+    <None Include="wwwroot\booking\scss\free\_tables.scss" />
+    <None Include="wwwroot\booking\scss\free\_treeview.scss" />
+    <None Include="wwwroot\booking\scss\mdb.lite.scss" />
+    <None Include="wwwroot\booking\scss\mdb.scss" />
+    <None Include="wwwroot\booking\scss\style.scss" />
+    <None Include="wwwroot\booking\scss\_custom-skin.scss" />
+    <None Include="wwwroot\booking\scss\_custom-styles.scss" />
+    <None Include="wwwroot\booking\scss\_custom-variables.scss" />
+    <None Include="wwwroot\booking\scss\_custom.scss" />
   </ItemGroup>
 
 
