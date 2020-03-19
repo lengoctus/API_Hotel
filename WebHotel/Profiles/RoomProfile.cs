@@ -8,12 +8,12 @@ using WebHotel.Models.ModelsView;
 
 namespace WebHotel.Profiles
 {
-    public class AccomodationProfile : Profile
+    public class RoomProfile : Profile
     {
-        public AccomodationProfile()
+        public RoomProfile()
         {
-            CreateMap<Accommodation, Accomodation_View>();
-            CreateMap<Accomodation_View, Accommodation>();
+            CreateMap<Room, Room_View>();
+            CreateMap<Room_View, Room>();
 
         }
     }

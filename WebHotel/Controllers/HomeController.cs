@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebHotel.Models;
 using WebHotel.Models.Dao;
+using WebHotel.Models.Entities;
 using WebHotel.Models.ModelsView;
 
 namespace WebHotel.Controllers
@@ -25,15 +26,17 @@ namespace WebHotel.Controllers
 
         public IActionResult Index()
         {
-            var list = new Accommodation_Dao().GetAccomo().Where(p => p.AccCategory == 1).Take(4).ToList();
-            ViewBag.listAcc_View = _mapper.Map<List<Accomodation_View>>(list);
+            var list = new Room_Dao().GetAccomo().Where(p => p.RoomCategory == 1).Take(4).ToList();
+            ViewBag.listAcc_View = _mapper.Map<List<Room_View>>(list);
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult BookingRoom(Booking_View booking)
+        public async Task<IActionResult> BookingRoom(Booking_View booking)
         {
+            var book = _mapper.Map<Booking>(booking);
+            var listRoom = new BookingRoom_Dao().GetListRoomForBooking(book);
             return View();
         }
 

@@ -175,8 +175,7 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
 	var datePicker = function () {
 		$('#probootstrap-date-departure, #probootstrap-date-arrival').datepicker({
-			'format': 'yyyy/mm/dd',
-			'autoclose': true
+			format: 'dd-mm-yyyy'
 		});
 	};
 	datePicker();

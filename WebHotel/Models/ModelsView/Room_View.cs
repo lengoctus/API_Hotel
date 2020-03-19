@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace WebHotel.Models.ModelsView
 {
-    public class Accomodation_View
+    public class Room_View
     {
         public int Id { get; set; }
-        public string AccName { get; set; }
+        public string RoomName { get; set; }
         public decimal Amount { get; set; }
         public decimal TotalAmount { get; set; }
-        public int AccCategory { get; set; }
+        public int RoomCategory { get; set; }
         public bool IsService { get; set; }
         public bool Status { get; set; }
         public string Image { get; set; }

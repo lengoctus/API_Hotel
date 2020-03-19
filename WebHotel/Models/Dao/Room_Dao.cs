@@ -8,18 +8,18 @@ using WebHotel.Models.Entities;
 
 namespace WebHotel.Models.Dao
 {
-    public class Accommodation_Dao
+    public class Room_Dao
     {
         private readonly HotelManagementContext _db;
 
-        public Accommodation_Dao()
+        public Room_Dao()
         {
             _db = new HotelManagementContext();
         }
 
-        public List<Accommodation> GetAccomo()
+        public List<Room> GetAccomo()
         {
-            var list = _db.Accommodation.ToList();
+            var list = _db.Room.ToList();
             return list;
         }
     }

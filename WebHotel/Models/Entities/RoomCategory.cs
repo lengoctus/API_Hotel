@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace WebHotel.Models.Entities
 {
-    public partial class AccommodationCategory
+    public partial class RoomCategory
     {
-        public AccommodationCategory()
+        public RoomCategory()
         {
-            Accommodation = new HashSet<Accommodation>();
+            Room = new HashSet<Room>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; }
         public decimal? Charge { get; set; }
 
-        public virtual ICollection<Accommodation> Accommodation { get; set; }
+        public virtual ICollection<Room> Room { get; set; }
     }
 }
