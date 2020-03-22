@@ -17,11 +17,13 @@ namespace WebHotel.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IMapper _mapper;
+        private readonly HotelManagementContext _db;
 
-        public HomeController(ILogger<HomeController> logger, IMapper mapper)
+        public HomeController(ILogger<HomeController> logger, IMapper mapper, HotelManagementContext db)
         {
             _logger = logger;
             _mapper = mapper;
+            _db = db;
         }
 
         public IActionResult Index()
@@ -35,9 +37,14 @@ namespace WebHotel.Controllers
         [HttpPost]
         public async Task<IActionResult> BookingRoom(Booking_View booking)
         {
-            var book = _mapper.Map<Booking>(booking);
-            var listRoom = new BookingRoom_Dao().GetListRoomForBooking(book);
-            return View();
+            if (ModelState.IsValid)
+            {
+                var book = _mapper.Map<Booking>(booking);
+                ViewBag.listRoom = await new BookingRoom_Dao(_db).GetListRoomForBooking(book, _mapper);
+
+                return View();
+            }
+            return RedirectToAction("Index");
         }
 
         public IActionResult Ahihi()

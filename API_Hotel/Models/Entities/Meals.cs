@@ -7,7 +7,7 @@ namespace API_Hotel.Models.Entities
     {
         public Meals()
         {
-            Accommodation = new HashSet<Accommodation>();
+            Services = new HashSet<Services>();
         }
 
         public int Id { get; set; }
@@ -15,9 +15,7 @@ namespace API_Hotel.Models.Entities
         public decimal? Amount { get; set; }
         public decimal? Charge { get; set; }
         public decimal? TotalAmount { get; set; }
-        public int? AccId { get; set; }
-        public int? IdCard { get; set; }
 
-        public virtual ICollection<Accommodation> Accommodation { get; set; }
+        public virtual ICollection<Services> Services { get; set; }
     }
 }

@@ -33,6 +33,5 @@ namespace API_Hotel.Services
         /// <param name="Password"></param>
         /// <returns></returns>
         Task<Customer> Login(string Phone, string Password);
-
     }
 }

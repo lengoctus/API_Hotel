@@ -1,0 +1,58 @@
+﻿@if (ViewBag.listRoom != null)
+{
+    foreach (var item in ViewBag.listRoom)
+    {
+        <div class="card mb-4 wow fadeIn listroom" style="visibility: hidden; animation-name: none;">
+
+            @*<div class="card-header font-weight-bold">
+                    <span>About author</span>
+                    <span class="pull-right">
+                        <a href="">
+                            <i class="fab fa-facebook-f mr-2"></i>
+                        </a>
+                        <a href="">
+                            <i class="fab fa-twitter mr-2"></i>
+                        </a>
+                        <a href="">
+                            <i class="fab fa-instagram mr-2"></i>
+                        </a>
+                        <a href="">
+                            <i class="fab fa-linkedin-in mr-2"></i>
+                        </a>
+                    </span>
+                </div>*@
+
+            <!--Card content-->
+            <div class="card-body">
+
+                <div class="media d-block d-md-flex mt-3">
+                    <img class="d-flex mb-3 mx-auto z-depth-1" src="~/images/@item.Image" alt="Generic placeholder image" style="width: 100px;">
+                    <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                        <h5 class="mt-0 font-weight-bold">
+                            <strong style="font-family: mallory,Helvetica Neue,Helvetica,Arial,sans-serif">@item.RoomName</strong>
+                        </h5>
+
+                        <div style="position: relative">
+                            <div style="width: 72%; border-right: solid 1px; display:inline-block">
+                                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                                deleniti atque corrupti
+                                quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
+                                similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum
+                                fuga.
+                            </div>
+
+                            <div style="display:inline; top: 114px; position: absolute; float: right; margin-left: 12px">
+                                <span style="font-size: 10px">Room amount + service charge</span>
+                                <span style="color: #e12d2d; font-size: 22px;line-height: 22px;font-weight: 500; float:right">@item.TotalAmount đ </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+}

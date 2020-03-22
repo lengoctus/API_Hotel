@@ -12,7 +12,10 @@ namespace WebHotel.Profiles
     {
         public RoomProfile()
         {
-            CreateMap<Room, Room_View>();
+            CreateMap<Room, Room_View>().ForMember(
+                dept => dept.CategoryName,
+                opt => opt.MapFrom(p => p.RoomCategoryNavigation.Name)
+                );
             CreateMap<Room_View, Room>();
 
         }

@@ -175,10 +175,13 @@ if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine
 
 	var datePicker = function () {
 		$('#probootstrap-date-departure, #probootstrap-date-arrival').datepicker({
-			format: 'dd-mm-yyyy'
+			dateFormat: 'yy-mm-dd',
+			minDate: 0,
+			autoclose: true
 		});
 	};
 	datePicker();
+
 
 	var searchAutoComplete = function () {
 		var listArea = ["An Giang", "Ba Ria - Vung Tau", "Bac Giang", "Bac Kan", "Bac Lieu", "Bac Ninh", "Ben Tre", "Binh Dinh", "Dinh Duong", "Binh Phuoc", "Binh Thuan", "Nghe An"];

@@ -12,6 +12,7 @@ namespace WebHotel.Models.ModelsView
         public decimal Amount { get; set; }
         public decimal TotalAmount { get; set; }
         public int RoomCategory { get; set; }
+        public string CategoryName { get; set; }
         public bool IsService { get; set; }
         public bool Status { get; set; }
         public string Image { get; set; }

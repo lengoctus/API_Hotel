@@ -27,8 +27,8 @@ namespace WebHotel
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<HotelManagementContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("ConnectDb")));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-            services.AddDbContext<HotelManagementContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

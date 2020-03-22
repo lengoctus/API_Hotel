@@ -16,5 +16,7 @@ namespace WebHotel.Models.ModelsView
         public int CusId { get; set; }
         public string Address { get; set; }
         public int NbPeople { get; set; }
+
+
     }
 }

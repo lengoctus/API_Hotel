@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using AutoMapper;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,17 +14,21 @@ namespace WebHotel.Models.Dao
     {
         private readonly HotelManagementContext _db;
 
-        public BookingRoom_Dao()
+        public BookingRoom_Dao(HotelManagementContext db)
         {
-            _db = new HotelManagementContext();
+            _db = db;
         }
 
-        public List<Booking> GetListRoomForBooking(Booking book)
+        public async Task<List<Room_View>> GetListRoomForBooking(Booking book, IMapper _mapper)
         {
-            var listRoom = _db.Booking.Where(p => p.OutDate < book.InDate).Select(p => p.RoomId).Distinct().ToList();
+            // Danh sach cac phong da duoc thue
+            var phongduocthue = _db.Booking.Where(p => p.OutDate >= book.InDate).GroupBy(p => p.RoomId).Select(p => p.Key).ToList();
 
-            var Rm = _db.Room.Where(p => !listRoom.Contains(p.Id)).ToList();
-            return null;
+            // Danh sach cac phong khach tra va chua duoc thue
+            var phongtrong = _db.Room.Where(p => !phongduocthue.Contains(p.Id)).ToList();
+
+            var phongtrong_2 = new List<Room_View>(_mapper.Map<List<Room_View>>(phongtrong));
+            return phongtrong_2;
         }
     }
 }
