@@ -3388,3 +3388,8 @@ Copyright (c) 2015 Daniel Eden
         box-shadow: 6px 9px 17px rgba(33,33,33,.2);
         cursor: pointer
     }
+
+
+body > div.container > div > div.col-md-8.well > form > div > div:nth-child(1) > div:nth-child() > label {
+    font-weight: bold;
+}

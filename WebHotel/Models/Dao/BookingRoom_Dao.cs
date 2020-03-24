@@ -30,5 +30,20 @@ namespace WebHotel.Models.Dao
             var phongtrong_2 = new List<Room_View>(_mapper.Map<List<Room_View>>(phongtrong));
             return phongtrong_2;
         }
+
+        public async Task<bool> AddBooking(Booking book)
+        {
+            try
+            {
+                _db.Booking.Add(book);
+                int a = _db.SaveChanges();
+                return a > 0 ? true : false;
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
+        }
     }
 }

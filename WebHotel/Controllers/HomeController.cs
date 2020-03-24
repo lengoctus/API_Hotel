@@ -4,8 +4,10 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using WebHotel.Models;
 using WebHotel.Models.Dao;
 using WebHotel.Models.Entities;
@@ -26,9 +28,9 @@ namespace WebHotel.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = new Room_Dao().GetAccomo().Where(p => p.RoomCategory == 1).Take(4).ToList();
+            var list =  new Room_Dao(_db).GetAccomo().Where(p => p.RoomCategory == 1).Take(4).ToList();
             ViewBag.listAcc_View = _mapper.Map<List<Room_View>>(list);
 
             return View();
@@ -42,15 +44,14 @@ namespace WebHotel.Controllers
                 var book = _mapper.Map<Booking>(booking);
                 ViewBag.listRoom = await new BookingRoom_Dao(_db).GetListRoomForBooking(book, _mapper);
 
+                string book_view = JsonConvert.SerializeObject(_mapper.Map<Booking_View>(book));
+                HttpContext.Session.SetString("book_view", book_view);
+
                 return View();
             }
             return RedirectToAction("Index");
         }
 
-        public IActionResult Ahihi()
-        {
-
-            return View();
-        }
+      
     }
 }

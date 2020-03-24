@@ -13,6 +13,7 @@ namespace API_Hotel.Models.Entities
         public int CusId { get; set; }
         public string Address { get; set; }
         public int? NbPeople { get; set; }
+        public int? Quantiy { get; set; }
 
         public virtual Customer Cus { get; set; }
         public virtual Room Room { get; set; }

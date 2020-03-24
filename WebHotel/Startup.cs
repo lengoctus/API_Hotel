@@ -26,6 +26,7 @@ namespace WebHotel
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession();
             services.AddControllersWithViews();
             services.AddDbContext<HotelManagementContext>(options => options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("ConnectDb")));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -48,7 +49,7 @@ namespace WebHotel
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -56,6 +57,10 @@ namespace WebHotel
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Payment}/{action=Index}/{id?}");
             });
         }
     }

@@ -33,6 +33,7 @@ namespace WebHotel.Models.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.;Database=HotelManagement;user id=sa;password=123456");
             }
         }
@@ -64,13 +65,13 @@ namespace WebHotel.Models.Entities
 
                 entity.HasOne(d => d.Cus)
                     .WithMany(p => p.Bill)
-                    .HasForeignKey(d => d.CusId)
+                    .HasForeignKey(x => x.CusId)
                     .HasConstraintName("FK_Bill_Customer1");
             });
 
             modelBuilder.Entity<Booking>(entity =>
             {
-                entity.HasKey(e => new { e.Id, e.RoomId, e.CusId })
+                entity.HasKey(x => new { x.Id, x.RoomId, x.CusId })
                     .HasName("PK_Booking_1");
 
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
@@ -89,13 +90,13 @@ namespace WebHotel.Models.Entities
 
                 entity.HasOne(d => d.Cus)
                     .WithMany(p => p.Booking)
-                    .HasForeignKey(d => d.CusId)
+                    .HasForeignKey(x => x.CusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Booking_Customer1");
 
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.Booking)
-                    .HasForeignKey(d => d.RoomId)
+                    .HasForeignKey(x => x.RoomId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Booking_Accommodation");
             });
@@ -137,7 +138,7 @@ namespace WebHotel.Models.Entities
 
                 entity.HasOne(d => d.IdRoleNavigation)
                     .WithMany(p => p.Employee)
-                    .HasForeignKey(d => d.IdRole)
+                    .HasForeignKey(x => x.IdRole)
                     .HasConstraintName("FK_Employee_Role");
             });
 
@@ -151,7 +152,7 @@ namespace WebHotel.Models.Entities
 
                 entity.HasOne(d => d.IdAccountNavigation)
                     .WithMany(p => p.Invoice)
-                    .HasForeignKey(d => d.IdAccount)
+                    .HasForeignKey(x => x.IdAccount)
                     .HasConstraintName("FK_Invoice_Account");
             });
 
@@ -200,7 +201,7 @@ namespace WebHotel.Models.Entities
 
                 entity.HasOne(d => d.RoomCategoryNavigation)
                     .WithMany(p => p.Room)
-                    .HasForeignKey(d => d.RoomCategory)
+                    .HasForeignKey(x => x.RoomCategory)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Accommodation_AccommodationCategory");
             });
@@ -214,7 +215,7 @@ namespace WebHotel.Models.Entities
 
             modelBuilder.Entity<ServiceOfAcc>(entity =>
             {
-                entity.HasKey(e => new { e.IdAccount, e.IdServices });
+                entity.HasKey(x => new { x.IdAccount, x.IdServices });
 
                 entity.Property(e => e.DateStart).HasColumnType("datetime");
 
@@ -222,20 +223,20 @@ namespace WebHotel.Models.Entities
 
                 entity.HasOne(d => d.IdAccountNavigation)
                     .WithMany(p => p.ServiceOfAcc)
-                    .HasForeignKey(d => d.IdAccount)
+                    .HasForeignKey(x => x.IdAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServiceOfAcc_Account");
 
                 entity.HasOne(d => d.IdServicesNavigation)
                     .WithMany(p => p.ServiceOfAcc)
-                    .HasForeignKey(d => d.IdServices)
+                    .HasForeignKey(x => x.IdServices)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ServiceOfAcc_ListServices");
             });
 
             modelBuilder.Entity<Services>(entity =>
             {
-                entity.HasKey(e => new { e.Id, e.RoomId, e.MealId })
+                entity.HasKey(x => new { x.Id, x.RoomId, x.MealId })
                     .HasName("PK_Services_1");
 
                 entity.Property(e => e.Id).ValueGeneratedOnAdd();
@@ -250,13 +251,13 @@ namespace WebHotel.Models.Entities
 
                 entity.HasOne(d => d.Meal)
                     .WithMany(p => p.Services)
-                    .HasForeignKey(d => d.MealId)
+                    .HasForeignKey(x => x.MealId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Services_Meals");
 
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.Services)
-                    .HasForeignKey(d => d.RoomId)
+                    .HasForeignKey(x => x.RoomId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Services_Accommodation1");
             });

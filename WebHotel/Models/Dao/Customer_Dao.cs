@@ -14,9 +14,9 @@ namespace WebHotel.Models.Dao
     {
         private HotelManagementContext _db;
 
-        public Customer_Dao()
+        public Customer_Dao(HotelManagementContext db)
         {
-            _db = new HotelManagementContext();
+            _db = db;
         }
 
         public string Enscrypt(string Phone, string Password)
@@ -88,6 +88,25 @@ namespace WebHotel.Models.Dao
 
         //    return Task.Run(() => listBook);
         //}
+
+        public Customer Register(Customer customer)
+        {
+            try
+            {
+                customer.Password = Enscrypt(customer.Phone, customer.Password);
+                if (_db.Customer.SingleOrDefault(p => p.Phone == customer.Phone) == null)
+                {
+                    _db.Customer.Add(customer);
+                    int a = _db.SaveChanges();
+                    return a > 0 ? customer : null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return null;
+        }
     }
 
 }

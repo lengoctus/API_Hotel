@@ -2,7 +2,7 @@
 {
     foreach (var item in ViewBag.listRoom)
     {
-        <div class="card mb-4 wow fadeIn listroom" style="visibility: hidden; animation-name: none;">
+        <div class="card mb-4 wow fadeIn listroom" style="visibility: hidden; animation-name: none;" data-idroom="@item.Id">
 
             @*<div class="card-header font-weight-bold">
                     <span>About author</span>
