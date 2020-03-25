@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -83,9 +83,6 @@ namespace WebHotel.Controllers
         {
             try
             {
-                // Insert Customer
-                var d = new Customer_Dao(_db).Register(_mapper.Map<Customer>(customer));
-
                 // Parse Session thanh Customer_View
                 var customer_view = HttpContext.Session.GetString("customerBooking");
                 var customerConvert = JsonConvert.DeserializeObject<Customer_View>(customer_view);
@@ -95,9 +92,16 @@ namespace WebHotel.Controllers
                 booking.CusId = customerConvert.Id;
                 booking.Quantiy = customer.Booking_View.Quantity;
 
-                var rs = new BookingRoom_Dao(_db).AddBooking(booking);
                 HttpContext.Session.Clear();
                 HttpContext.Session.SetString("id", booking.RoomId.ToString());
+
+                // Insert Customer
+                var d = new Customer_Dao(_db).Register(_mapper.Map<Customer>(customer));
+                using (HttpClient _client = new HttpClient())
+                {
+
+                }
+                var rs = new BookingRoom_Dao(_db).AddBooking(booking);
                 return RedirectToAction("Index");
             }
             catch (Exception)

@@ -23,7 +23,7 @@ namespace WebHotel.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IMapper _mapper;
         private readonly HotelManagementContext _db;
-        private readonly string UrlApi = "http://localhost:8012/api/";
+        private readonly string UrlApi = "http://localhost:8011/api/";
 
         public HomeController(ILogger<HomeController> logger, IMapper mapper, HotelManagementContext db)
         {
@@ -56,14 +56,15 @@ namespace WebHotel.Controllers
                 };
 
 
-                HttpClient _client = new HttpClient();
 
 
-                var content = JsonConvert.SerializeObject(infoBooking);
-                var httpResponse = await _client.PostAsync(UrlApi + "Booking/GetRoom", new StringContent(content, Encoding.Default, "application/json"));
-
-                var createdTask = JsonConvert.DeserializeObject<InfoBooking>(await httpResponse.Content.ReadAsStringAsync());
-
+                using (HttpClient _client = new HttpClient())
+                {
+                    var content = JsonConvert.SerializeObject(infoBooking);
+                    var httpResponse = await _client.PostAsync(UrlApi + "Booking/GetRoom", new StringContent(content, Encoding.Default, "application/json"));
+                    ViewBag.listRoom = JsonConvert.DeserializeObject<List<Room>>(httpResponse.Content.ReadAsStringAsync().Result);
+                }
+                //var createdTask = JsonConvert.DeserializeObject<InfoBooking>(await httpResponse.Content.ReadAsStringAsync());
 
                 //ViewBag.listRoom = await new BookingRoom_Dao().GetListRoomForBooking(book, _mapper);
 
