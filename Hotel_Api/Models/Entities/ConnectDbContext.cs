@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace API_Hotel.Models.Entities
+namespace Hotel_Api.Models.Entities
 {
     public partial class ConnectDbContext : DbContext
     {

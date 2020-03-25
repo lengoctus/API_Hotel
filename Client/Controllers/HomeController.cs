@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 
 using System.Threading.Tasks;
@@ -18,12 +19,10 @@ namespace Client.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly string UrlApi = "http://localhost:8012/api/Customer/";
-        private readonly HttpClient _client;
 
-        public HomeController(ILogger<HomeController> logger, HttpClient client)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _client = client;
         }
 
         public async Task<IActionResult> Index()
@@ -45,12 +44,22 @@ namespace Client.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(CustomerView customer)
         {
+            HttpClient _client = new HttpClient();
+           
+
             var content = JsonConvert.SerializeObject(customer);
             var httpResponse = await _client.PostAsync(UrlApi + "Login", new StringContent(content, Encoding.Default, "application/json"));
 
             var createdTask = JsonConvert.DeserializeObject<CustomerView>(await httpResponse.Content.ReadAsStringAsync());
             return View();
 
+        }
+
+
+        [HttpPost]
+        public IActionResult SearchRoom(CustomerView customer)
+        {
+            return View();
         }
 
 

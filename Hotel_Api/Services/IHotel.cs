@@ -1,11 +1,12 @@
-﻿using API_Hotel.Models.Entities;
+﻿using Hotel_Api.Models.Entities;
 using AutoMapper;
+using Hotel_Api.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API_Hotel.Services
+namespace Hotel_Api.Services
 {
     public interface IHotel
     {

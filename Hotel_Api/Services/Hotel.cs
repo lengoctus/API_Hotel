@@ -1,6 +1,7 @@
-﻿using API_Hotel.Models.Entities;
-using API_Hotel.Models.ModelViews;
+﻿using Hotel_Api.Models.Entities;
+using Hotel_Api.Models.ModelViews;
 using AutoMapper;
+using Hotel_Api.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API_Hotel.Services
+namespace Hotel_Api.Services
 {
     public class Hotel : IHotel
     {
