@@ -10,7 +10,7 @@ namespace Hotel_Api.Services
 {
     public interface IHotel
     {
-
+        //========================= Customer ====================
         /// <summary>
         /// Get list Customer by FullName or Phone
         /// </summary>
@@ -18,6 +18,13 @@ namespace Hotel_Api.Services
         /// <param name="Phone"></param>
         /// <returns></returns>
         Task<List<Customer>> Gets(string FullName, string Phone);
+
+        /// <summary>
+        /// Add Customer
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        Task<Customer> AddCustomer(Customer customer);
 
         /// <summary>
         /// Update Info Customer
@@ -58,8 +65,20 @@ namespace Hotel_Api.Services
         /// <returns></returns>
         Task<List<Booking>> GetBooking(int? Cusid);
 
-
+        /// <summary>
+        /// Get Room for Booking
+        /// </summary>
+        /// <param name="bookingSourse"></param>
+        /// <param name="booking"></param>
+        /// <param name="RoomSourse"></param>
+        /// <returns></returns>
         Task<List<Room>> BookingRoom(List<Booking> bookingSourse, Booking booking, List<Room> RoomSourse);
 
+        /// <summary>
+        /// Add Booking
+        /// </summary>
+        /// <param name="booking"></param>
+        /// <returns></returns>
+        Task<Booking> AddBooking(Booking booking);
     }
 }

@@ -27,22 +27,21 @@ namespace Hotel_Api.Controllers
         }
 
         // GET: api/<controller>
-        //[HttpGet("{bookingSourse}/{booking}/{RoomSourse}")]
-        //[HttpPost]
-        //public async Task<ActionResult<IEnumerable<Booking_View>>> GetRoom(List<Booking_View> bookingSourse, Booking_View booking, List<Room_View> RoomSourse)
-        //{
-        //    var listBooking = _mapper.Map<List<Booking>>(bookingSourse);
-        //    var booking_2 = _mapper.Map<Booking>(booking);
-        //    var listRoom = _mapper.Map<List<Room>>(RoomSourse);
+        [HttpPost("GetRoom")]
+        public async Task<ActionResult> GetRoom([FromBody]InfoBooking infoBooking)
+        {
+            var listBooking = _mapper.Map<List<Booking>>(infoBooking.bookingSourse);
+            var booking_2 = _mapper.Map<Booking>(infoBooking.Booking);
+            var listRoom = _mapper.Map<List<Room>>(infoBooking.RoomSourse);
 
 
-        //    var listBookingResult = await _hotel.BookingRoom(listBooking, booking_2, listRoom);
-        //    if (listBookingResult != null)
-        //    {
-        //        return Ok(_mapper.Map<List<Booking_View>>(listBookingResult));
-        //    }
-        //    return NotFound();
-        //}
+            var listBookingResult = await _hotel.BookingRoom(listBooking, booking_2, listRoom);
+            if (listBookingResult != null)
+            {
+                return Ok(_mapper.Map<List<Room>>(listBookingResult));
+            }
+            return NotFound();
+        }
 
 
 
@@ -59,9 +58,15 @@ namespace Hotel_Api.Controllers
         }
 
         // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpPost("Add")]
+        public async Task<IActionResult> Add([FromBody]Booking_View booking_view)
         {
+            if (ModelState.IsValid)
+            {
+                var booking = _mapper.Map<Booking>(booking_view);
+                var rs = await _hotel.AddBooking(booking);
+                return rs != null ? Ok(_mapper.Map<>)
+            }
         }
 
         // PUT api/<controller>/5

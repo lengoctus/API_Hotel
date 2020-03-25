@@ -1,7 +1,6 @@
 ﻿using Hotel_Api.Models.Entities;
 using Hotel_Api.Models.ModelViews;
 using AutoMapper;
-using Hotel_Api.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,6 +18,38 @@ namespace Hotel_Api.Services
         public Hotel(ConnectDbContext db)
         {
             _db = db;
+        }
+
+        public Task<Booking> AddBooking(Booking booking)
+        {
+            try
+            {
+                _db.Booking.Add(booking);
+                _db.SaveChanges();
+                return Task.FromResult(booking);
+            }
+            catch 
+            {
+                return Task.FromResult<Booking>(null);
+            }
+        }
+
+        public Task<Customer> AddCustomer(Customer customer)
+        {
+            try
+            {
+                if (_db.Customer.SingleOrDefault(p => p.Phone == customer.Phone) == null)
+                {
+                    _db.Customer.Add(customer);
+                    _db.SaveChanges();
+                    return Task.FromResult(customer);
+                }
+            }
+            catch
+            {
+                return Task.FromResult<Customer>(null);
+            }
+            return Task.FromResult<Customer>(null);
         }
 
         public Task<List<Room>> BookingRoom(List<Booking> bookingSourse, Booking booking, List<Room> RoomSourse)
