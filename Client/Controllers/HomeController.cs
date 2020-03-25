@@ -15,14 +15,31 @@ using Newtonsoft.Json;
 namespace Client.Controllers
 {
 
+    [Route("homes")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly string UrlApi = "http://localhost:8012/api/Customer/";
+        //private readonly string UrlApi = "http://localhost:8012/api/Customer/";
+        private readonly string UrlApi = "http://localhost:50438/api/Booking/2"; 
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+        }
+
+        [HttpGet("test")]
+        public IActionResult Testtt()
+        {
+            HttpClient client = new HttpClient();
+            Task<string> customer = client.GetStringAsync("http://localhost:50438/api/Booking/2");
+            Debug.WriteLine(customer.Result);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
         }
 
         public async Task<IActionResult> Index()
@@ -34,11 +51,11 @@ namespace Client.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
 
 
         [HttpPost]
